@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://cookieexfilter/skin/options.css"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://cookieexfilter/locale/options.dtd">
+
+<prefwindow id="cookieexfilter-prefs"
+     title="CookieExFilter Options"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ 
+	<prefpane id="cookieexfilter-pane1" label="&pane1.label;">
+		<preferences>
+			<preference id="pref_allowRegExp" name="extensions.cookieexfilter.allowRegExp" type="bool"/>
+			<preference id="pref_useGlobSyntax" name="extensions.cookieexfilter.useGlobSyntax" type="bool"/>
+			
+			<preference id="pref_useFilter" name="extensions.cookieexfilter.useFilter" type="bool"/>
+			
+			<preference id="pref_filterDelay" name="extensions.cookieexfilter.filterDelay" type="int"/>
+			
+			<preference id="pref_selectWhenFound" name="extensions.cookieexfilter.selectWhenFound" type="bool"/>
+			<preference id="pref_focusWhenFound" name="extensions.cookieexfilter.focusWhenFound" type="bool"/>
+		</preferences>
+
+		<vbox id="cookieexfilter-vbox">
+			<groupbox id="cookieexfilter-inputType">
+				<caption label="&inputType.label;"/>
+				<checkbox label="&allowRegExp.label;" preference="pref_allowRegExp" />
+				<checkbox label="&useGlobSyntax.label;" preference="pref_useGlobSyntax" />
+			</groupbox>
+			<groupbox id="cookieexfilter-searchType">
+				<caption label="&searchType.label;"/>
+				<radiogroup preference="pref_useFilter">
+					<radio label="&useFilter.label;" value="true" />
+					<radio label="&useScroll.label;" value="false" />
+				</radiogroup>
+			</groupbox>
+			<groupbox id="cookieexfilter-filterDelay">
+				<caption label="&filterDelay.label;"/>
+				<textbox preference="pref_filterDelay" type="number" min="20" max="2000" increment="5"/>
+			</groupbox>
+			<groupbox id="cookieexfilter-afterSearch">
+				<caption label="&afterSearch.label;"/>
+				<checkbox label="&selectWhenFound.label;" preference="pref_selectWhenFound" />
+				<checkbox label="&focusWhenFound.label;" preference="pref_focusWhenFound" />
+			</groupbox>
+		</vbox>
+	</prefpane>
+	
+	<prefpane id="cookieexfilter-pane2" label="&pane2.label;">
+		<preferences>
+			<preference id="pref_searchCookies" name="extensions.cookieexfilter.searchCookies" type="bool"/>
+			<preference id="pref_searchPopups" name="extensions.cookieexfilter.searchPopups" type="bool"/>
+			<preference id="pref_searchImages" name="extensions.cookieexfilter.searchImages" type="bool"/>
+			
+			<preference id="pref_contextCookies" name="extensions.cookieexfilter.contextCookies" type="bool"/>
+			<preference id="pref_contextPopups" name="extensions.cookieexfilter.contextPopups" type="bool"/>
+			<preference id="pref_contextImages" name="extensions.cookieexfilter.contextImages" type="bool"/>
+		</preferences>
+
+		<vbox id="cookieexfilter-vbox2">
+			<groupbox id="cookieexfilter-searchLocations">
+				<caption label="&searchLocations.label;"/>
+				<checkbox label="&cookies.label;" preference="pref_searchCookies" />
+				<checkbox label="&popups.label;" preference="pref_searchPopups" />
+				<checkbox label="&images.label;" preference="pref_searchImages" />
+			</groupbox>
+			<groupbox id="cookieexfilter-contextLocations">
+				<caption label="&contextLocations.label;"/>
+				<checkbox label="&cookies.label;" preference="pref_contextCookies" />
+				<checkbox label="&popups.label;" preference="pref_contextPopups" />
+				<checkbox label="&images.label;" preference="pref_contextImages" />
+			</groupbox>
+		</vbox>
+	</prefpane>
+ 
+</prefwindow>

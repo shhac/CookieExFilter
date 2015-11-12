@@ -1,0 +1,5 @@
+content	cookieexfilter	chrome/content/
+skin	cookieexfilter	skin chrome/skin/
+locale	cookieexfilter en-GB chrome/locale/en-GB/
+
+overlay	chrome://browser/content/preferences/permissions.xul	chrome://cookieexfilter/content/permissionsOverlay.xul
