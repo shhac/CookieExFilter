@@ -14,3 +14,10 @@ You also have a choice of the way results are checked against search term;
 ---
  
 You can find the add-on on the FireFox website [**here**](https://addons.mozilla.org/en-US/firefox/addon/cookieexfilter/)
+
+---
+
+The internal resources relevant to this add-on can be viewed within FireFox at
+
+ - `chrome://browser/content/preferences/permissions.xul`
+ - `chrome://browser/content/preferences/permissions.js`
