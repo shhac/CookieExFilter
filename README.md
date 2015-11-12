@@ -10,5 +10,7 @@ You also have a choice of the way results are checked against search term;
  - Regular Expression
  - Glob
  - Mixture of these two (or neither for plain text)
+
+---
  
- You can find the add-on on the FireFox website [**here**](https://addons.mozilla.org/en-US/firefox/addon/cookieexfilter/)
+You can find the add-on on the FireFox website [**here**](https://addons.mozilla.org/en-US/firefox/addon/cookieexfilter/)
