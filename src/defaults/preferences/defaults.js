@@ -1,0 +1,14 @@
+pref('extensions.cookieexfilter.useFilter', true);
+pref('extensions.cookieexfilter.filterDelay', 500);
+pref('extensions.cookieexfilter.allowRegExp', false);
+pref('extensions.cookieexfilter.useGlobSyntax', false);
+pref('extensions.cookieexfilter.selectWhenFound', true);
+pref('extensions.cookieexfilter.focusWhenFound', false);
+pref('extensions.cookieexfilter.searchCookies', true);
+pref('extensions.cookieexfilter.searchPopups', true);
+pref('extensions.cookieexfilter.searchImages', true);
+pref('extensions.cookieexfilter.searchUnknown', false);
+pref('extensions.cookieexfilter.contextCookies', true);
+pref('extensions.cookieexfilter.contextPopups', true);
+pref('extensions.cookieexfilter.contextImages', true);
+pref('extensions.cookieexfilter.contextUnknown', false);

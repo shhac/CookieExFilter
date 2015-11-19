@@ -1,0 +1,23 @@
+<!ENTITY pane1.label "General">
+<!ENTITY pane2.label "Interface">
+
+<!ENTITY inputType.label "Input Type">
+<!ENTITY searchType.label "Search Type">
+<!ENTITY afterSearch.label "After Scrolling">
+
+<!ENTITY useFilter.label "Filter">
+<!ENTITY useScroll.label "Scroll">
+
+<!ENTITY filterDelay.label "Filter Delay (ms)">
+
+<!ENTITY allowRegExp.label "Allow Regular Expressions">
+<!ENTITY useGlobSyntax.label "Use Glob Syntax">
+<!ENTITY selectWhenFound.label "Select When Found">
+<!ENTITY focusWhenFound.label "Focus When Found">
+
+<!ENTITY searchLocations.label "Add Search Bar to">
+<!ENTITY contextLocations.label "Add Context Menu to">
+
+<!ENTITY cookies.label "Cookies">
+<!ENTITY popups.label "Popups">
+<!ENTITY images.label "Images">

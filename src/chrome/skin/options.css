@@ -1,0 +1,9 @@
+radio[pane="cookieexfilter-pane1"] {
+	list-style-image: url(chrome://browser/skin/preferences/Options.png);
+	-moz-image-region: rect(0px, 32px,  32px, 0px);
+}
+
+radio[pane="cookieexfilter-pane2"] {
+	list-style-image: url(chrome://browser/skin/preferences/Options.png);
+	-moz-image-region: rect(0px, 128px,  32px, 96px);
+}
