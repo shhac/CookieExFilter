@@ -76,7 +76,7 @@ var CookieExFilter = {
 		menu.names.setAttribute('disabled', 'true');
 		if(menu.selection.count === 0) menu.names.setAttribute('label', '');
 		else if(menu.selection.count === 1){
-			menu.names.setAttribute('label', g._permissions[g._tree.currentIndex].rawHost);
+			menu.names.setAttribute('label', g._permissions[g._tree.currentIndex].origin);
 			menu.names.setAttribute('disabled', 'false');
 		}else menu.names.setAttribute('label', '(' + menu.selection.count.toString(10) + ')');
 	},
@@ -88,7 +88,7 @@ var CookieExFilter = {
 		    ioService = null, promptService = null,
 		    updatePM = true;
 		try{  // Now rewrite of gPermissionManager.addPermission, looping over selection
-			ioService = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
+			ioService = Services.io; // Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
 			for(i = 0; i < rc; i++){
 				min = {};
 				max = {};
@@ -96,20 +96,20 @@ var CookieExFilter = {
 				for(j = min.value; j <= max.value; j++){
 					updatePM = true;
 					if(g._permissions[j].perm === capability) updatePM = false;
-					host = g._permissions[j].rawHost.replace(/^\s*([-\w]*:\/+)?/, '');
-					uri = ioService.newURI('http://'+host, null, null);
+					host = g._permissions[j].origin; // .replace(/^\s*([-\w]*:\/+)?/, '');
+					uri = ioService.newURI(/*'http://'+*/host, null, null);
 					host = uri.host;
 					if (updatePM) {
-						host = (host.charAt(0) == '.') ? host.substring(1,host.length) : host;
-						uri = ioService.newURI('http://' + host, null, null);
+						//host = (host.charAt(0) == '.') ? host.substring(1,host.length) : host;
+						uri = ioService.newURI(/*'http://' + */host, null, null);
 						g._pm.add(uri, g._type, capability);
 					}
 				}
 			}
-		}catch(ex){
-			promptService = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
-      promptService.alert(window, g._bundle.getString('invalidURITitle'), g._bundle.getString('invalidURI'));
-      return;
+		} catch(ex) {
+			promptService = Services.prompt; // Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
+            promptService.alert(window, g._bundle.getString('invalidURITitle'), g._bundle.getString('invalidURI'));
+            return;
 		}
 	},
 	applyContextMenu : function(i){ // As most buttons share code, this enables them to do that
@@ -159,14 +159,14 @@ var CookieExFilter = {
 	},
 	permissionsCache : [],
 	sortCache : function(){
-		this.permissionsCache.sort(function (a, b) { return a.rawHost.toLowerCase().localeCompare(b.rawHost.toLowerCase()); });
+		this.permissionsCache.sort(function (a, b) { return a.origin.toLowerCase().localeCompare(b.origin.toLowerCase()); });
 	},
 	addToCache : function(aPermission){
-		var g = gPermissionManager, host = '', capabilityString = null, p = null;
+		var g = gPermissionManager, principal = null, capabilityString = null, p = null;
 		if(aPermission.type == g._type && (!g._manageCapability || (aPermission.capability == g._manageCapability))){
-			host = aPermission.host;
+			principal = aPermission.principal;
 			capabilityString = g._getCapabilityString(aPermission.capability);
-			p = new Permission(host, (host.charAt(0) == ".") ? host.substring(1,host.length) : host, aPermission.type, capabilityString, aPermission.capability);
+			p = new Permission(principal, aPermission.type, capabilityString);
 			this.permissionsCache.push(p);
 		}
 	},
@@ -198,11 +198,11 @@ var CookieExFilter = {
 				re = this.prepareRegEx(filter_plain);
 				if(re === null){ // indexOf
 					for(i = 0; i < permissionCount; i++){
-						if(this.permissionsCache[i].rawHost.indexOf(filter_plain) !== -1) g._permissions.push(this.permissionsCache[i]);
+						if(this.permissionsCache[i].origin.indexOf(filter_plain) !== -1) g._permissions.push(this.permissionsCache[i]);
 					}
 				}else{ // RegEx/Glob
 					for(i = 0; i < permissionCount; i++){
-						if(re.test(this.permissionsCache[i].rawHost)) g._permissions.push(this.permissionsCache[i]);
+						if(re.test(this.permissionsCache[i].origin)) g._permissions.push(this.permissionsCache[i]);
 					}
 				}
 			}
@@ -240,7 +240,7 @@ var CookieExFilter = {
 			if(re === null){ // indexOf
 				for(i = 0; i < rowCount; i++){
 					k = ( i + j ) % rowCount; // Start from current selection rather than 1st row
-					if(g._permissions[k].rawHost.indexOf(filter_plain) !== -1) {
+					if(g._permissions[k].origin.indexOf(filter_plain) !== -1) {
 						found = true;
 						break;
 					}
@@ -248,7 +248,7 @@ var CookieExFilter = {
 			}else{ // RegEx/Glob
 				for(i = 0; i < rowCount; i++){
 					k = ( i + j ) % rowCount; // Start from current selection rather than 1st row
-					if(re.test(g._permissions[k].rawHost)) {
+					if(re.test(g._permissions[k].origin)) {
 						found = true;
 						break;
 					}
@@ -312,7 +312,7 @@ var CookieExFilter = {
 		var g = gPermissionManager;
 		g._tree = document.getElementById('permissionsTree');
 		g._permissions = [];
-		g._lastPermissionSortColumn = 'rawHost';
+		g._lastPermissionSortColumn = 'statusCol'; // statusCol, siteCol
 		CookieExFilter.filter(true);
 	},
 	init_observer : function(){
