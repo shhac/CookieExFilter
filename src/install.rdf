@@ -16,7 +16,7 @@
     <em:description>Search cookie exceptions quickly and easily.</em:description>
     
 		<em:targetApplication>
-      <Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}" em:minVersion="42" em:maxVersion="44.*"/>
+      <Description em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}" em:minVersion="42.0" em:maxVersion="44.*"/>
     </em:targetApplication>
 		
   </Description>
